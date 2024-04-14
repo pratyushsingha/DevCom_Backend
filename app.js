@@ -41,7 +41,11 @@ app.use(express.static('public'));
 app.use(cookieParser());
 
 import userRouter from './src/routes/user.routes.js';
+import productRouter from './src/routes/product.routes.js';
+import categoryRouter from './src/routes/category.routes.js';
 
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/products', productRouter);
+app.use('/api/v1/categories', categoryRouter);
 
 export { app };
