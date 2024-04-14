@@ -1,26 +1,26 @@
-import { User } from "../../models/user.model.js";
-import { ApiError } from "../utils/ApiError.js";
-import { asyncHandler } from "../utils/AsyncHandler.js";
-import jwt from "jsonwebtoken";
+import { User } from '../../models/user.model.js';
+import { ApiError } from '../utils/ApiError.js';
+import { asyncHandler } from '../utils/AsyncHandler.js';
+import jwt from 'jsonwebtoken';
 
 const verifyJWT = asyncHandler(async (req, res, next) => {
   try {
     const token =
       req.cookies.accessToken ||
-      (req.header && req.header("Authorization")?.replace("Bearer", ""));
+      (req.header && req.header('Authorization')?.replace('Bearer', ''));
 
     if (!token) {
-      throw new ApiError(401, "unauthorized request");
+      throw new ApiError(401, 'unauthorized request');
     }
 
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
     const user = await User.findById(decodedToken?._id).select(
-      "-password -refreshToken"
+      '-password -refreshToken'
     );
 
     if (!user) {
-      throw new ApiError(422, "invalid access token");
+      throw new ApiError(422, 'invalid access token');
     }
     req.user = user;
     next();
@@ -29,4 +29,21 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
   }
 });
 
-export { verifyJWT };
+const verifyADMIN = asyncHandler(async (req, _, next) => {
+  try {
+    if (req.user.role !== 'Admin') {
+      throw new ApiError(
+        401,
+        'Unauthorized: You do not have admin privileges.'
+      );
+    }
+    next();
+  } catch (error) {
+    throw new ApiError(
+      422,
+      'An error occurred while verifying admin privileges.'
+    );
+  }
+});
+
+export { verifyJWT, verifyADMIN };
