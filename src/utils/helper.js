@@ -14,4 +14,10 @@ const getMongoosePaginationOptions = ({
   };
 };
 
-export { getMongoosePaginationOptions };
+const defaultExpiry = () => {
+  const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + 30);
+  return currentDate;
+};
+
+export { getMongoosePaginationOptions, defaultExpiry };

@@ -8,3 +8,9 @@ export const userRolesEnum = {
 export const availableUserRoles = Object.values(userRolesEnum);
 
 export const MAXIMUM_SUB_IMAGE_COUNT = 4;
+
+export const CouponTypeEnum = {
+  FLAT: 'FLAT'
+};
+
+export const availableCouponType = Object.values(CouponTypeEnum);
