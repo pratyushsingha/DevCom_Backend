@@ -225,6 +225,11 @@ const orderListAdmin = asyncHandler(async (req, res) => {
 
   const orderAggregate = await Order.aggregate([
     {
+      $match: {
+        status: status,
+      },
+    },
+    {
       $lookup: {
         from: 'coupons',
         localField: 'coupon',
@@ -310,7 +315,7 @@ const orderListAdmin = asyncHandler(async (req, res) => {
 
   return res
     .status(201)
-    .json(new ApiResponse(200, orderList, 'order list fetched successfully'));
+    .json(new ApiResponse(200, orderAggregate, 'order list fetched successfully'));
 });
 
-export { checkout, orderVerification, getOrderById,orderListAdmin };
+export { checkout, orderVerification, getOrderById, orderListAdmin };
