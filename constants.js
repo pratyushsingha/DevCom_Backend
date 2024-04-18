@@ -14,3 +14,11 @@ export const CouponTypeEnum = {
 };
 
 export const availableCouponType = Object.values(CouponTypeEnum);
+
+export const orderStatusEnum = {
+  PENDING: 'PENDING',
+  DELIVERED: 'DELIVERED',
+  CANCELLED: 'CANCELLED'
+};
+
+export const orderStatuses = Object.values(orderStatusEnum);
