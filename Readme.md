@@ -16,15 +16,15 @@ Clone the project
 Install dependencies
 
 ```bash
-  bun install
+  npm install
 ```
 
 Start the server
 
 ```bash
-  bun run dev
+  npm run dev
 ```
 server is  running at `http://localhost:8080/`
 
 ## documentation
-(will add soon)
+[swagger documentation](https://devcom.cyclic.app/api/v1/docs)
