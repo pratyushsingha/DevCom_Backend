@@ -3,8 +3,6 @@ import requestIp from 'request-ip';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import rateLimit from 'express-rate-limit';
-import swaggerUi from 'swagger-ui-express';
-import swaggerDocument from './swagger.json' assert { type: 'json' };
 
 const app = express();
 app.use(
@@ -59,15 +57,5 @@ app.use('/api/v1/coupons', couponRouter);
 app.use('/api/v1/addresses', addressRouter);
 app.use('/api/v1/orders', orderRouter);
 app.use('/api/v1/healthcheck', healthCheckRouter);
-app.use(
-  '/api/v1/docs',
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, {
-    swaggerOptions: {
-      docExpansion: 'none'
-    },
-    customSiteTitle: 'DevCom Api Docs'
-  })
-);
 
 export { app };
