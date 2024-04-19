@@ -1,0 +1,5465 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Devcom",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8080/api/v1"
+      }
+    ],
+    "tags": [
+      {
+        "name": "user"
+      },
+      {
+        "name": "products"
+      },
+      {
+        "name": "categories"
+      },
+      {
+        "name": "Cart"
+      },
+      {
+        "name": "coupon"
+      },
+      {
+        "name": "address"
+      },
+      {
+        "name": "order"
+      },
+      {
+        "name": "default"
+      }
+    ],
+    "paths": {
+      "/users/register": {
+        "post": {
+          "tags": [
+            "user"
+          ],
+          "summary": "register",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "username": "user",
+                    "email": "user@gmail.com",
+                    "password": "User@2004",
+                    "role": "Admin"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4996"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "867"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "431"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"1af-7ZP8vMgMF9SrkMwi3fvzWlTTqdo\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Thu, 18 Apr 2024 19:03:41 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 201,
+                    "data": {
+                      "_id": "66216e8dd6a2266dce272d97",
+                      "firstName": "Freddy",
+                      "lastName": "Ryan",
+                      "countryCode": "643",
+                      "phoneNumber": "938-272-4598 x958",
+                      "username": "user",
+                      "email": "user@gmail.com",
+                      "avatar": "https://ui-avatars.com/api/?name=user&background=random&color=fff",
+                      "role": "Admin",
+                      "createdAt": "2024-04-18T19:03:41.247Z",
+                      "updatedAt": "2024-04-18T19:03:41.247Z",
+                      "__v": 0
+                    },
+                    "message": "user resgistered successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/login": {
+        "post": {
+          "tags": [
+            "user"
+          ],
+          "summary": "login",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "email": "user@gmail.com",
+                    "password": "User@2004"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4995"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "821"
+                  }
+                },
+                "Set-Cookie": {
+                  "schema": {
+                    "type": "number",
+                    "example": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjIxNmU4ZGQ2YTIyNjZkY2UyNzJkOTciLCJpYXQiOjE3MTM0NjcwNjYsImV4cCI6MTcxNjA1OTA2Nn0.57UNtbe6mLcuXX2CBF8BdwJkqx0L99Kbjg3qsAaJt7I; Path=/; HttpOnly; Secure"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "429"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"1ad-Jid6uLV+89eKMACbVPYt1Y2+Gn0\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Thu, 18 Apr 2024 19:04:26 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "66216e8dd6a2266dce272d97",
+                      "firstName": "Freddy",
+                      "lastName": "Ryan",
+                      "countryCode": "643",
+                      "phoneNumber": "938-272-4598 x958",
+                      "username": "user",
+                      "email": "user@gmail.com",
+                      "avatar": "https://ui-avatars.com/api/?name=user&background=random&color=fff",
+                      "role": "Admin",
+                      "createdAt": "2024-04-18T19:03:41.247Z",
+                      "updatedAt": "2024-04-18T19:04:26.906Z",
+                      "__v": 0
+                    },
+                    "message": "User logged in successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/logout": {
+        "post": {
+          "tags": [
+            "user"
+          ],
+          "summary": "logout",
+          "requestBody": {
+            "content": {}
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4994"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "790"
+                  }
+                },
+                "Set-Cookie": {
+                  "schema": {
+                    "type": "string",
+                    "example": "refreshToken=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; Secure"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "84"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"54-Xn+kZDPT0R8eXNsIgrEl/Hq2iOA\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Thu, 18 Apr 2024 19:04:57 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {},
+                    "message": "user logged out successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/avatar": {
+        "patch": {
+          "tags": [
+            "user"
+          ],
+          "summary": "avatar",
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "avatar": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4997"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "788"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "635"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"27b-4ycrBLMKYbEUMXBS4QZNwKmzyKg\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 09:36:22 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "66216e8dd6a2266dce272d97",
+                      "firstName": "john",
+                      "lastName": "Doe",
+                      "countryCode": "+91",
+                      "phoneNumber": "9830355637",
+                      "username": "user",
+                      "email": "user@gmail.com",
+                      "avatar": "http://res.cloudinary.com/dom61f3n8/image/upload/v1713519381/ll0usapmuyx6azfrzxld.jpg",
+                      "role": "Admin",
+                      "createdAt": "2024-04-18T19:03:41.247Z",
+                      "updatedAt": "2024-04-19T09:36:22.448Z",
+                      "__v": 0,
+                      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjIxNmU4ZGQ2YTIyNjZkY2UyNzJkOTciLCJpYXQiOjE3MTM1MTI5NTksImV4cCI6MTcxNjEwNDk1OX0.YovkuhhWKmlK9Mbox5kRoU6jANm3W2_agyCKFP_8akE"
+                    },
+                    "message": "Avatar image updated successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/profile": {
+        "patch": {
+          "tags": [
+            "user"
+          ],
+          "summary": "userDetails",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "firstName": "john",
+                    "lastName": "Doe",
+                    "countryCode": "+91",
+                    "phoneNumber": "9830355637"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4995"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "530"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "615"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"267-W1N0bK5LhSrn+5ArXSU9LO0z0cY\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 06:32:12 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "66216e8dd6a2266dce272d97",
+                      "firstName": "john",
+                      "lastName": "Doe",
+                      "countryCode": "+91",
+                      "phoneNumber": "9830355637",
+                      "username": "user",
+                      "email": "user@gmail.com",
+                      "avatar": "https://ui-avatars.com/api/?name=user&background=random&color=fff",
+                      "role": "Admin",
+                      "createdAt": "2024-04-18T19:03:41.247Z",
+                      "updatedAt": "2024-04-19T06:32:12.796Z",
+                      "__v": 0,
+                      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjIxNmU4ZGQ2YTIyNjZkY2UyNzJkOTciLCJpYXQiOjE3MTM1MDgzMDcsImV4cCI6MTcxNjEwMDMwN30.Eipam9YsQ15ERbvld1FlOana1PDy3kV4zcsy8EtI6xU"
+                    },
+                    "message": "user details updated successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "user"
+          ],
+          "summary": "getUserDetails",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4997"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "642"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "212"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"d4-EPTRcvgAO8PRaniSHw5WgTqKonU\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 06:38:13 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "66216e8dd6a2266dce272d97",
+                      "firstName": "john",
+                      "lastName": "Doe",
+                      "countryCode": "+91",
+                      "phoneNumber": "9830355637",
+                      "__v": 0
+                    },
+                    "message": "user details fetched successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/change-password": {
+        "patch": {
+          "tags": [
+            "user"
+          ],
+          "summary": "changePassword",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "oldPassword": "User@2004",
+                    "newPassword": "Test@2004"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4994"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "475"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "85"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"55-AVy11EA2s20gtlW5KNKfhSshxNM\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 06:33:07 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 201,
+                    "data": {},
+                    "message": "password changed successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/refresh-token": {
+        "post": {
+          "tags": [
+            "user"
+          ],
+          "summary": "refreshAccessToken",
+          "requestBody": {
+            "content": {}
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4999"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "900"
+                  }
+                },
+                "Set-Cookie": {
+                  "schema": {
+                    "type": "string",
+                    "example": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjIxNmU4ZGQ2YTIyNjZkY2UyNzJkOTciLCJpYXQiOjE3MTM1MDg0MzQsImV4cCI6MTcxNjEwMDQzNH0.IKfzaAXUKfB-3ENV9Hxm-xWbK2bdGayqxn7CQEymcls; Path=/; HttpOnly; Secure"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "533"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"215-9I51Fwu1ARB+yN3MFPySI1v2Ans\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 06:33:54 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjIxNmU4ZGQ2YTIyNjZkY2UyNzJkOTciLCJlbWFpbCI6InVzZXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJ1c2VyIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzEzNTA4NDM0LCJleHAiOjE3MTM1OTQ4MzR9.9BJbTVcKdb7f0r_Au2uDlTN8b3MNp3wv4MnkQDcKwQ8",
+                      "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjIxNmU4ZGQ2YTIyNjZkY2UyNzJkOTciLCJpYXQiOjE3MTM1MDg0MzQsImV4cCI6MTcxNjEwMDQzNH0.IKfzaAXUKfB-3ENV9Hxm-xWbK2bdGayqxn7CQEymcls"
+                    },
+                    "message": "Access token refreshed",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/current-user": {
+        "get": {
+          "tags": [
+            "user"
+          ],
+          "summary": "currentUser",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4998"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "873"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "425"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"1a9-fCSbjaEJL+qsOOsfccAbVN5tJHE\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 06:34:22 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "66216e8dd6a2266dce272d97",
+                      "firstName": "john",
+                      "lastName": "Doe",
+                      "countryCode": "+91",
+                      "phoneNumber": "9830355637",
+                      "username": "user",
+                      "email": "user@gmail.com",
+                      "avatar": "https://ui-avatars.com/api/?name=user&background=random&color=fff",
+                      "role": "Admin",
+                      "createdAt": "2024-04-18T19:03:41.247Z",
+                      "updatedAt": "2024-04-19T06:33:54.744Z",
+                      "__v": 0
+                    },
+                    "message": "Current user fetched successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/products/": {
+        "post": {
+          "tags": [
+            "products"
+          ],
+          "summary": "createProduct",
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "example": "koken"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "jdedjhuhdr hduehdfuedfbefbh euihfjeuhfuehfehe"
+                    },
+                    "stock": {
+                      "type": "integer",
+                      "example": "10"
+                    },
+                    "category": {
+                      "type": "string",
+                      "example": "661b8880fd00f60214bc0a94"
+                    },
+                    "mainImage": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "subImages": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "price": {
+                      "type": "integer",
+                      "example": "100"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4999"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "900"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "842"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"34a-Xn0HgGQxAMyDZ2LkOSrxIrn1th0\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 06:50:27 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 201,
+                    "data": {
+                      "name": "iphone",
+                      "description": "jdedjhuhdr hduehdfuedfbefbh euihfjeuhfuehfehe",
+                      "price": 100,
+                      "stock": 10,
+                      "category": "66221326b5a313bb5afa09c2",
+                      "mainImage": "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509422/wrbi51pi6sx5p1egyemx.png",
+                      "subImages": [
+                        "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509423/gaq8mhbf7xvfg3tzt6ri.jpg",
+                        "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509424/z9ogsnefg7sacnftyksb.jpg",
+                        "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509425/bfmkgwq4wriqlhnpnpp5.png",
+                        "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509426/dimwlmaaulvblwwifdw2.jpg"
+                      ],
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "_id": "66221433205bd3a159656450",
+                      "createdAt": "2024-04-19T06:50:27.418Z",
+                      "updatedAt": "2024-04-19T06:50:27.418Z",
+                      "__v": 0
+                    },
+                    "message": "product created successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "products"
+          ],
+          "summary": "getAllProducts",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4996"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "455"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "2897"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"b51-cMjFS/wwcbIgbLPRrYgil8/HCHs\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 07:16:37 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "Products": [
+                        {
+                          "_id": "661bb61b445749284264cec0",
+                          "name": "koken3",
+                          "description": "The iPhone 14 display has rounded corners that follow a beautiful curved design, and these corners are within a standard rectangle. When measured as a standard rectangular shape, the screen is 15.40 centimetres (6.06) diagonally.",
+                          "price": 100,
+                          "stock": 10,
+                          "category": "661ba17444ecca3f273280d9",
+                          "mainImage": "http://res.cloudinary.com/dom61f3n8/image/upload/v1713092164/plpbvodadmzoz80kghm6.png",
+                          "subImages": [
+                            "http://res.cloudinary.com/dom61f3n8/image/upload/v1713092100/xf8nq9uelavylm1dggsi.jpg",
+                            "http://res.cloudinary.com/dom61f3n8/image/upload/v1713092108/iap9zpelyvysoynwjhks.png",
+                            "http://res.cloudinary.com/dom61f3n8/image/upload/v1713092118/bvikrvabrkirxvkvqyrc.png",
+                            "http://res.cloudinary.com/dom61f3n8/image/upload/v1713092122/xftzd8yuhdjal0unqobz.png"
+                          ],
+                          "owner": "661ab932c4d459478196053f",
+                          "createdAt": "2024-04-14T10:55:23.186Z",
+                          "updatedAt": "2024-04-19T07:09:11.321Z",
+                          "__v": 0
+                        },
+                        {
+                          "_id": "661be165771a722b17fd9507",
+                          "name": "condom",
+                          "description": "jdedjhuhdr hduehdfuedfbefbh euihfjeuhfuehfehe",
+                          "price": 100,
+                          "stock": 10,
+                          "category": "661ba17444ecca3f273280d9",
+                          "mainImage": "http://res.cloudinary.com/dom61f3n8/image/upload/v1713103185/ydzqqctpquyogrbnhqxg.png",
+                          "subImages": [
+                            "http://res.cloudinary.com/dom61f3n8/image/upload/v1713103186/tnibheb0v3dwhyhb80ct.jpg",
+                            "http://res.cloudinary.com/dom61f3n8/image/upload/v1713103192/ppih6ghhmabtrhirpec6.png",
+                            "http://res.cloudinary.com/dom61f3n8/image/upload/v1713103200/gai0bdxgxyteqjndzjov.png",
+                            "http://res.cloudinary.com/dom61f3n8/image/upload/v1713103203/dr48pwnj2kpohbaklbsu.png"
+                          ],
+                          "owner": "661be113771a722b17fd94fd",
+                          "createdAt": "2024-04-14T14:00:05.152Z",
+                          "updatedAt": "2024-04-14T14:00:05.152Z",
+                          "__v": 0
+                        },
+                        {
+                          "_id": "66221433205bd3a159656450",
+                          "name": "iphone",
+                          "description": "The iPhone 14 display has rounded corners that follow a beautiful curved design, and these corners are within a standard rectangle. When measured as a standard rectangular shape, the screen is 15.40 centimetres (6.06) diagonally.",
+                          "price": 100,
+                          "stock": 10,
+                          "category": "66221326b5a313bb5afa09c2",
+                          "mainImage": "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509422/wrbi51pi6sx5p1egyemx.png",
+                          "subImages": [
+                            "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509423/gaq8mhbf7xvfg3tzt6ri.jpg",
+                            "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509424/z9ogsnefg7sacnftyksb.jpg",
+                            "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509425/bfmkgwq4wriqlhnpnpp5.png",
+                            "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509426/dimwlmaaulvblwwifdw2.jpg"
+                          ],
+                          "owner": "66216e8dd6a2266dce272d97",
+                          "createdAt": "2024-04-19T06:50:27.418Z",
+                          "updatedAt": "2024-04-19T07:10:11.525Z",
+                          "__v": 0
+                        }
+                      ],
+                      "allProducts": 3,
+                      "limit": 10,
+                      "page": 1,
+                      "totalPages": 1,
+                      "serialNumberStartFrom": 1,
+                      "hasPrevPage": false,
+                      "hasNextPage": false,
+                      "prevPage": null,
+                      "nextPage": null
+                    },
+                    "message": "products fetched successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/products/66221433205bd3a159656450": {
+        "get": {
+          "tags": [
+            "products"
+          ],
+          "summary": "getProductById",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4998"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "174"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "842"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"34a-/sOY8SvBVvQSIx9/zEyWjX832CU\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 07:02:22 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "66221433205bd3a159656450",
+                      "name": "iphone",
+                      "description": "jdedjhuhdr hduehdfuedfbefbh euihfjeuhfuehfehe",
+                      "price": 100,
+                      "stock": 10,
+                      "category": "66221326b5a313bb5afa09c2",
+                      "mainImage": "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509422/wrbi51pi6sx5p1egyemx.png",
+                      "subImages": [
+                        "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509423/gaq8mhbf7xvfg3tzt6ri.jpg",
+                        "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509424/z9ogsnefg7sacnftyksb.jpg",
+                        "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509425/bfmkgwq4wriqlhnpnpp5.png",
+                        "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509426/dimwlmaaulvblwwifdw2.jpg"
+                      ],
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "createdAt": "2024-04-19T06:50:27.418Z",
+                      "updatedAt": "2024-04-19T06:50:27.418Z",
+                      "__v": 0
+                    },
+                    "message": "product fetched successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/products/661bb61b445749284264cec0": {
+        "patch": {
+          "tags": [
+            "products"
+          ],
+          "summary": "updateProduct",
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "description": {
+                      "type": "number",
+                      "example": "The iPhone 14 display has rounded corners that follow a beautiful curved design, and these corners are within a standard rectangle. When measured as a standard rectangular shape, the screen is 15.40 centimetres (6.06) diagonally."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4998"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "840"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "1026"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"402-zBOxiJ0ogLeqkdjPjXm0VPyOF9A\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 07:10:11 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "66221433205bd3a159656450",
+                      "name": "iphone",
+                      "description": "The iPhone 14 display has rounded corners that follow a beautiful curved design, and these corners are within a standard rectangle. When measured as a standard rectangular shape, the screen is 15.40 centimetres (6.06) diagonally.",
+                      "price": 100,
+                      "stock": 10,
+                      "category": "66221326b5a313bb5afa09c2",
+                      "mainImage": "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509422/wrbi51pi6sx5p1egyemx.png",
+                      "subImages": [
+                        "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509423/gaq8mhbf7xvfg3tzt6ri.jpg",
+                        "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509424/z9ogsnefg7sacnftyksb.jpg",
+                        "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509425/bfmkgwq4wriqlhnpnpp5.png",
+                        "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509426/dimwlmaaulvblwwifdw2.jpg"
+                      ],
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "createdAt": "2024-04-19T06:50:27.418Z",
+                      "updatedAt": "2024-04-19T07:10:11.525Z",
+                      "__v": 0
+                    },
+                    "message": "product updated successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/products/661b8fab4f17ab02c4db7e24": {
+        "delete": {
+          "tags": [
+            "products"
+          ],
+          "summary": "deleteProduct",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4997"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "618"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "509"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"1fd-IB0btpN37fd2dqqnuRhVo80Q6kg\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 07:13:54 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 201,
+                    "data": {
+                      "deleteProduct": {
+                        "_id": "661bb486c343e8ec965b00db",
+                        "name": "koken2",
+                        "description": "jdedjhuhdr hduehdfuedfbefbh euihfjeuhfuehfehe",
+                        "price": 100,
+                        "stock": 10,
+                        "category": "661ba17444ecca3f273280d9",
+                        "mainImage": "http://res.cloudinary.com/dom61f3n8/image/upload/v1713091869/ek7vlcgrzss6g8zq8tvl.png",
+                        "subImages": [],
+                        "owner": "661ab932c4d459478196053f",
+                        "createdAt": "2024-04-14T10:48:38.203Z",
+                        "updatedAt": "2024-04-14T10:51:09.500Z",
+                        "__v": 0
+                      }
+                    },
+                    "message": "product deleted successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/products/category/66221326b5a313bb5afa09c2": {
+        "get": {
+          "tags": [
+            "products"
+          ],
+          "summary": "getProductByCategory",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4999"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "900"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "1038"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"40e-iRPrJMKVfQwCKhTMeawhDm+nCcg\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 07:28:44 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": [
+                      {
+                        "_id": "66221433205bd3a159656450",
+                        "name": "iphone",
+                        "description": "The iPhone 14 display has rounded corners that follow a beautiful curved design, and these corners are within a standard rectangle. When measured as a standard rectangular shape, the screen is 15.40 centimetres (6.06) diagonally.",
+                        "price": 100,
+                        "stock": 10,
+                        "category": "66221326b5a313bb5afa09c2",
+                        "mainImage": "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509422/wrbi51pi6sx5p1egyemx.png",
+                        "subImages": [
+                          "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509423/gaq8mhbf7xvfg3tzt6ri.jpg",
+                          "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509424/z9ogsnefg7sacnftyksb.jpg",
+                          "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509425/bfmkgwq4wriqlhnpnpp5.png",
+                          "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509426/dimwlmaaulvblwwifdw2.jpg"
+                        ],
+                        "owner": "66216e8dd6a2266dce272d97",
+                        "createdAt": "2024-04-19T06:50:27.418Z",
+                        "updatedAt": "2024-04-19T07:10:11.525Z",
+                        "__v": 0
+                      }
+                    ],
+                    "message": "Category products fetched successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/categories/": {
+        "post": {
+          "tags": [
+            "categories"
+          ],
+          "summary": "createCategory",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "name": "testCategory"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4996"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "177"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "254"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"fe-Sx4kMMqHubtPvPYTlS4shGs+4cM\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 06:45:58 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "name": "mobile",
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "_id": "66221326b5a313bb5afa09c2",
+                      "createdAt": "2024-04-19T06:45:58.368Z",
+                      "updatedAt": "2024-04-19T06:45:58.368Z",
+                      "__v": 0
+                    },
+                    "message": "category created successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "categories"
+          ],
+          "summary": "getAllCategories",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4993"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "737"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "781"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"30d-QFAhwoDX04tq9ap0ih7eobmdyyk\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 07:51:40 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "Categories": [
+                        {
+                          "_id": "661ba17444ecca3f273280d9",
+                          "name": "testCategory",
+                          "owner": "661ab932c4d459478196053f",
+                          "createdAt": "2024-04-14T09:27:16.908Z",
+                          "updatedAt": "2024-04-14T09:27:16.908Z",
+                          "__v": 0
+                        },
+                        {
+                          "_id": "661ba17c44ecca3f273280dd",
+                          "name": "testCategory2",
+                          "owner": "661ab932c4d459478196053f",
+                          "createdAt": "2024-04-14T09:27:24.549Z",
+                          "updatedAt": "2024-04-14T09:27:24.549Z",
+                          "__v": 0
+                        },
+                        {
+                          "_id": "66221326b5a313bb5afa09c2",
+                          "name": "Mobile",
+                          "owner": "66216e8dd6a2266dce272d97",
+                          "createdAt": "2024-04-19T06:45:58.368Z",
+                          "updatedAt": "2024-04-19T07:49:30.241Z",
+                          "__v": 0
+                        }
+                      ],
+                      "AllCategories": 3,
+                      "limit": 10,
+                      "page": 1,
+                      "totalPages": 1,
+                      "serialNumberStartFrom": 1,
+                      "hasPrevPage": false,
+                      "hasNextPage": false,
+                      "prevPage": null,
+                      "nextPage": null
+                    },
+                    "message": "categories fetched succesffulyy",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/categories/66221326b5a313bb5afa09c2": {
+        "patch": {
+          "tags": [
+            "categories"
+          ],
+          "summary": "updateCategory",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "name": "Mobile"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4996"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "868"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "254"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"fe-x+5TY1e9P42v8xHRaoVFvFazwa8\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 07:49:30 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "66221326b5a313bb5afa09c2",
+                      "name": "Mobile",
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "createdAt": "2024-04-19T06:45:58.368Z",
+                      "updatedAt": "2024-04-19T07:49:30.241Z",
+                      "__v": 0
+                    },
+                    "message": "category updated successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "categories"
+          ],
+          "summary": "getCategoryById",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4995"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "814"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "254"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"fe-mLQxW6vtHt9ClTqsITev6fczSxU\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 07:50:24 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "66221326b5a313bb5afa09c2",
+                      "name": "Mobile",
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "createdAt": "2024-04-19T06:45:58.368Z",
+                      "updatedAt": "2024-04-19T07:49:30.241Z",
+                      "__v": 0
+                    },
+                    "message": "category fetched successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/categories/661ba18344ecca3f273280e1": {
+        "delete": {
+          "tags": [
+            "categories"
+          ],
+          "summary": "deleteCategory",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4994"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "765"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "281"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"119-kB06kyUkUWXxuDdtsNuuNX5A6qY\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 07:51:12 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "deletedCategory": {
+                        "_id": "661ba18344ecca3f273280e1",
+                        "name": "testCategory3",
+                        "owner": "661ab932c4d459478196053f",
+                        "createdAt": "2024-04-14T09:27:31.278Z",
+                        "updatedAt": "2024-04-14T09:27:31.278Z",
+                        "__v": 0
+                      }
+                    },
+                    "message": "Category deleted successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/cart/item/661bb486c343e8ec965b00db": {
+        "post": {
+          "tags": [
+            "Cart"
+          ],
+          "summary": "addToCart",
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "product": {
+                      "type": "string"
+                    },
+                    "quantity": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4991"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "684"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "338"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"152-wQu1LdN/G6eWUH/+rDMH/DJggmg\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 07:52:33 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "662222be025e8da200efcfe0",
+                      "items": [
+                        {
+                          "product": "66221433205bd3a159656450",
+                          "quantity": 2,
+                          "_id": "662222be025e8da200efcfe1"
+                        }
+                      ],
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "createdAt": "2024-04-19T07:52:30.323Z",
+                      "updatedAt": "2024-04-19T07:52:33.420Z",
+                      "__v": 0
+                    },
+                    "message": "Product added to cart successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/cart/item/66221433205bd3a159656450": {
+        "delete": {
+          "tags": [
+            "Cart"
+          ],
+          "summary": "removeFromCart",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4990"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "643"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "342"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"156-eF3x5Afd+AiMoAMh7Qf8//kWzwo\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 07:53:14 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "662222be025e8da200efcfe0",
+                      "items": [
+                        {
+                          "product": "66221433205bd3a159656450",
+                          "quantity": 1,
+                          "_id": "662222be025e8da200efcfe1"
+                        }
+                      ],
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "createdAt": "2024-04-19T07:52:30.323Z",
+                      "updatedAt": "2024-04-19T07:53:14.610Z",
+                      "__v": 0
+                    },
+                    "message": "Product removed from cart successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/cart/clear": {
+        "delete": {
+          "tags": [
+            "Cart"
+          ],
+          "summary": "clearCart",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4989"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "609"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "245"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"f5-SXUIlee858jPKEJCvSMY2Hjmsr8\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 07:53:48 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "662222be025e8da200efcfe0",
+                      "items": [],
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "createdAt": "2024-04-19T07:52:30.323Z",
+                      "updatedAt": "2024-04-19T07:53:48.439Z",
+                      "__v": 1
+                    },
+                    "message": "cart cleared successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/cart/": {
+        "get": {
+          "tags": [
+            "Cart"
+          ],
+          "summary": "getCart",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4986"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "557"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "1144"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"478-j7AKe1P3NJaJ8/Jh5L7/dSnfFhc\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 07:54:40 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": null,
+                      "items": [
+                        {
+                          "_id": "662222be025e8da200efcfe0",
+                          "product": {
+                            "_id": "66221433205bd3a159656450",
+                            "name": "iphone",
+                            "description": "The iPhone 14 display has rounded corners that follow a beautiful curved design, and these corners are within a standard rectangle. When measured as a standard rectangular shape, the screen is 15.40 centimetres (6.06) diagonally.",
+                            "price": 100,
+                            "stock": 10,
+                            "category": "66221326b5a313bb5afa09c2",
+                            "mainImage": "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509422/wrbi51pi6sx5p1egyemx.png",
+                            "subImages": [
+                              "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509423/gaq8mhbf7xvfg3tzt6ri.jpg",
+                              "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509424/z9ogsnefg7sacnftyksb.jpg",
+                              "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509425/bfmkgwq4wriqlhnpnpp5.png",
+                              "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509426/dimwlmaaulvblwwifdw2.jpg"
+                            ],
+                            "owner": "66216e8dd6a2266dce272d97",
+                            "createdAt": "2024-04-19T06:50:27.418Z",
+                            "updatedAt": "2024-04-19T07:10:11.525Z",
+                            "__v": 0
+                          },
+                          "quantity": 2
+                        }
+                      ],
+                      "cartTotal": 200,
+                      "discountCartValue": 200
+                    },
+                    "message": "cart fetched successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/coupons/": {
+        "post": {
+          "tags": [
+            "coupon"
+          ],
+          "summary": "createCoipon",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "name": "saturday special",
+                    "couponCode": "SATURDAY90",
+                    "type": "FLAT",
+                    "discountValue": 100,
+                    "minimumCartValue": 150
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4985"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "52"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "438"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"1b6-joXs5oss4imQnX1wZbf/DzB056Y\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 08:03:05 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "name": "saturday special",
+                      "couponCode": "SATURDAY90",
+                      "type": "FLAT",
+                      "discountValue": 100,
+                      "minimumCartValue": 150,
+                      "isActive": true,
+                      "expiryDate": "2024-05-19T08:03:05.942Z",
+                      "startDate": "2024-04-19T07:27:31.590Z",
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "_id": "66222539025e8da200efcffe",
+                      "createdAt": "2024-04-19T08:03:05.943Z",
+                      "updatedAt": "2024-04-19T08:03:05.943Z",
+                      "__v": 0
+                    },
+                    "message": "coupon created succefully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/coupons/66222539025e8da200efcffe": {
+        "patch": {
+          "tags": [
+            "coupon"
+          ],
+          "summary": "updateCoupon",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "couponCode": "SATURDAY200"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4999"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "900"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "395"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"18b-ikn9FpXGlSd2efgiqm0/Gxv2bCA\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 08:34:14 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "66222539025e8da200efcffe",
+                      "couponCode": "SATURDAY200",
+                      "type": "FLAT",
+                      "minimumCartValue": 150,
+                      "isActive": true,
+                      "expiryDate": "2024-05-19T08:03:05.942Z",
+                      "startDate": "2024-04-19T07:27:31.590Z",
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "createdAt": "2024-04-19T08:03:05.943Z",
+                      "updatedAt": "2024-04-19T08:34:14.000Z",
+                      "__v": 0
+                    },
+                    "message": "Coupon updated successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "coupon"
+          ],
+          "summary": "getCouponById",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4998"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "853"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "403"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"193-7w09Nzye2/+HVpycOUbi4ueE0lo\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 08:35:01 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "66222539025e8da200efcffe",
+                      "couponCode": "SATURDAY200",
+                      "type": "FLAT",
+                      "minimumCartValue": 150,
+                      "isActive": true,
+                      "expiryDate": "2024-05-19T08:03:05.942Z",
+                      "startDate": "2024-04-19T07:27:31.590Z",
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "createdAt": "2024-04-19T08:03:05.943Z",
+                      "updatedAt": "2024-04-19T08:34:14.000Z",
+                      "__v": 0
+                    },
+                    "message": "coupon details fetched successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "coupon"
+          ],
+          "summary": "deleteCoupon",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4996"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "778"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "395"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"18b-RaJ3rhu/k0pF1V5woYamBSMxRNQ\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 08:36:16 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "66222539025e8da200efcffe",
+                      "couponCode": "SATURDAY200",
+                      "type": "FLAT",
+                      "minimumCartValue": 150,
+                      "isActive": true,
+                      "expiryDate": "2024-05-19T08:03:05.942Z",
+                      "startDate": "2024-04-19T07:27:31.590Z",
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "createdAt": "2024-04-19T08:03:05.943Z",
+                      "updatedAt": "2024-04-19T08:34:14.000Z",
+                      "__v": 0
+                    },
+                    "message": "coupon deleted Successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/coupons": {
+        "get": {
+          "tags": [
+            "coupon"
+          ],
+          "summary": "getAllCoupons",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4994"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "702"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "1320"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"528-vEoj1cEZkTCq0Dzp6K2O75CG0rU\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 08:37:32 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "coupons": [
+                        {
+                          "_id": "661d4af4b036e0818aa11993",
+                          "name": "Test Coupon2",
+                          "couponCode": "TESTCOUPON2",
+                          "type": "FLAT",
+                          "discountValue": 500,
+                          "minimumCartValue": 700,
+                          "isActive": false,
+                          "expiryDate": "2024-05-15T15:42:44.705Z",
+                          "startDate": "2024-04-15T15:39:32.986Z",
+                          "owner": "661be113771a722b17fd94fd",
+                          "createdAt": "2024-04-15T15:42:44.709Z",
+                          "updatedAt": "2024-04-15T17:07:00.586Z",
+                          "__v": 0
+                        },
+                        {
+                          "_id": "661d4b86a1f7602b2945fe26",
+                          "name": "Test Coupon1",
+                          "couponCode": "TESTCOUPON1",
+                          "type": "FLAT",
+                          "discountValue": 100,
+                          "minimumCartValue": 1000,
+                          "isActive": true,
+                          "expiryDate": "2024-05-15T15:45:10.033Z",
+                          "startDate": "2024-04-15T15:44:59.741Z",
+                          "owner": "661be113771a722b17fd94fd",
+                          "createdAt": "2024-04-15T15:45:10.037Z",
+                          "updatedAt": "2024-04-15T15:45:10.037Z",
+                          "__v": 0
+                        },
+                        {
+                          "_id": "66222d3510a672b2bd720e4c",
+                          "name": "saturday special",
+                          "couponCode": "SATURDAY100",
+                          "type": "FLAT",
+                          "discountValue": 100,
+                          "minimumCartValue": 150,
+                          "isActive": true,
+                          "expiryDate": "2024-05-19T08:37:09.835Z",
+                          "startDate": "2024-04-19T08:34:07.737Z",
+                          "owner": "66216e8dd6a2266dce272d97",
+                          "createdAt": "2024-04-19T08:37:09.838Z",
+                          "updatedAt": "2024-04-19T08:37:09.838Z",
+                          "__v": 0
+                        }
+                      ],
+                      "AllCoupons": 3,
+                      "limit": 10,
+                      "page": 1,
+                      "totalPages": 1,
+                      "serialNumberStartFrom": 1,
+                      "hasPrevPage": false,
+                      "hasNextPage": false,
+                      "prevPage": null,
+                      "nextPage": null
+                    },
+                    "message": "coupons fetched successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/coupons/customer/available": {
+        "get": {
+          "tags": [
+            "coupon"
+          ],
+          "summary": "getAvailableCouponCodes",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4993"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "675"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "454"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"1c6-0yAdf1c9CVD9JMyrS1mhjBnFSsk\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 08:37:59 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": [
+                      {
+                        "_id": "66222d3510a672b2bd720e4c",
+                        "name": "saturday special",
+                        "couponCode": "SATURDAY100",
+                        "type": "FLAT",
+                        "discountValue": 100,
+                        "minimumCartValue": 150,
+                        "isActive": true,
+                        "expiryDate": "2024-05-19T08:37:09.835Z",
+                        "startDate": "2024-04-19T08:34:07.737Z",
+                        "owner": "66216e8dd6a2266dce272d97",
+                        "createdAt": "2024-04-19T08:37:09.838Z",
+                        "updatedAt": "2024-04-19T08:37:09.838Z",
+                        "__v": 0
+                      }
+                    ],
+                    "message": "available coupons fetched successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/coupons/status/66222d3510a672b2bd720e4c": {
+        "patch": {
+          "tags": [
+            "coupon"
+          ],
+          "summary": "couponActivityStatus",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "isActive": false
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4998"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "885"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "442"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"1ba-DTYCCF0uChJtnyDVqZLd8QPRS24\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 09:07:25 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "66222d3510a672b2bd720e4c",
+                      "name": "saturday special",
+                      "couponCode": "SATURDAY100",
+                      "type": "FLAT",
+                      "discountValue": 100,
+                      "minimumCartValue": 150,
+                      "isActive": false,
+                      "expiryDate": "2024-05-19T08:37:09.835Z",
+                      "startDate": "2024-04-19T08:34:07.737Z",
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "createdAt": "2024-04-19T08:37:09.838Z",
+                      "updatedAt": "2024-04-19T09:07:25.180Z",
+                      "__v": 0
+                    },
+                    "message": "coupon updated successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/coupons/c/apply": {
+        "post": {
+          "tags": [
+            "coupon"
+          ],
+          "summary": "applyCoupon",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "couponCode": "SATURDAY100"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4996"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "787"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "1552"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"610-tLS9ihyxemhUXgQz9ArRRo9SLa8\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 09:09:02 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": null,
+                      "items": [
+                        {
+                          "_id": "662222be025e8da200efcfe0",
+                          "coupon": "66222d3510a672b2bd720e4c",
+                          "product": {
+                            "_id": "66221433205bd3a159656450",
+                            "name": "iphone",
+                            "description": "The iPhone 14 display has rounded corners that follow a beautiful curved design, and these corners are within a standard rectangle. When measured as a standard rectangular shape, the screen is 15.40 centimetres (6.06) diagonally.",
+                            "price": 100,
+                            "stock": 10,
+                            "category": "66221326b5a313bb5afa09c2",
+                            "mainImage": "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509422/wrbi51pi6sx5p1egyemx.png",
+                            "subImages": [
+                              "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509423/gaq8mhbf7xvfg3tzt6ri.jpg",
+                              "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509424/z9ogsnefg7sacnftyksb.jpg",
+                              "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509425/bfmkgwq4wriqlhnpnpp5.png",
+                              "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509426/dimwlmaaulvblwwifdw2.jpg"
+                            ],
+                            "owner": "66216e8dd6a2266dce272d97",
+                            "createdAt": "2024-04-19T06:50:27.418Z",
+                            "updatedAt": "2024-04-19T07:10:11.525Z",
+                            "__v": 0
+                          },
+                          "quantity": 2
+                        }
+                      ],
+                      "cartTotal": 200,
+                      "coupon": {
+                        "_id": "66222d3510a672b2bd720e4c",
+                        "name": "saturday special",
+                        "couponCode": "SATURDAY100",
+                        "type": "FLAT",
+                        "discountValue": 100,
+                        "minimumCartValue": 150,
+                        "isActive": true,
+                        "expiryDate": "2024-05-19T08:37:09.835Z",
+                        "startDate": "2024-04-19T08:34:07.737Z",
+                        "owner": "66216e8dd6a2266dce272d97",
+                        "createdAt": "2024-04-19T08:37:09.838Z",
+                        "updatedAt": "2024-04-19T09:07:25.180Z",
+                        "__v": 0
+                      },
+                      "discountCartValue": 100
+                    },
+                    "message": "coupon applied successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/coupons/c/remove": {
+        "post": {
+          "tags": [
+            "coupon"
+          ],
+          "summary": "removeCoupon",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "couponCode": "TESTCOUPON2"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4995"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "671"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "1146"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"47a-0LT1KS/n6OlDTYe2sJmS5nJcJTE\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 09:10:58 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": null,
+                      "items": [
+                        {
+                          "_id": "662222be025e8da200efcfe0",
+                          "product": {
+                            "_id": "66221433205bd3a159656450",
+                            "name": "iphone",
+                            "description": "The iPhone 14 display has rounded corners that follow a beautiful curved design, and these corners are within a standard rectangle. When measured as a standard rectangular shape, the screen is 15.40 centimetres (6.06) diagonally.",
+                            "price": 100,
+                            "stock": 10,
+                            "category": "66221326b5a313bb5afa09c2",
+                            "mainImage": "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509422/wrbi51pi6sx5p1egyemx.png",
+                            "subImages": [
+                              "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509423/gaq8mhbf7xvfg3tzt6ri.jpg",
+                              "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509424/z9ogsnefg7sacnftyksb.jpg",
+                              "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509425/bfmkgwq4wriqlhnpnpp5.png",
+                              "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509426/dimwlmaaulvblwwifdw2.jpg"
+                            ],
+                            "owner": "66216e8dd6a2266dce272d97",
+                            "createdAt": "2024-04-19T06:50:27.418Z",
+                            "updatedAt": "2024-04-19T07:10:11.525Z",
+                            "__v": 0
+                          },
+                          "quantity": 2
+                        }
+                      ],
+                      "cartTotal": 200,
+                      "discountCartValue": 200
+                    },
+                    "message": "Coupon removed successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/addresses": {
+        "post": {
+          "tags": [
+            "address"
+          ],
+          "summary": "createAddress",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "addressLine1": "123 Main Street",
+                    "addressLine2": "Apt 101",
+                    "city": "Anytown",
+                    "state": "Anystate",
+                    "pincode": 743136,
+                    "country": "United States"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful response",
+              "content": {
+                "application/json": {}
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "address"
+          ],
+          "summary": "getAllAddresses",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4999"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "900"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "666"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"29a-Y0TMY98ibsufgEFZfwwjzgBQ/II\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 09:23:51 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": [
+                      {
+                        "_id": "662237d110a672b2bd720e80",
+                        "addressLine1": "123 Main Street",
+                        "addressLine2": "Apt 101",
+                        "city": "Anytown",
+                        "state": "Anystate",
+                        "pincode": 743136,
+                        "country": "United States",
+                        "owner": "66216e8dd6a2266dce272d97",
+                        "createdAt": "2024-04-19T09:22:25.367Z",
+                        "updatedAt": "2024-04-19T09:22:25.367Z",
+                        "__v": 0
+                      },
+                      {
+                        "_id": "662237f310a672b2bd720e83",
+                        "addressLine1": "123 Main Street",
+                        "addressLine2": "Apt 101",
+                        "city": "kolkata",
+                        "state": "west bengal",
+                        "pincode": 743137,
+                        "country": "india",
+                        "owner": "66216e8dd6a2266dce272d97",
+                        "createdAt": "2024-04-19T09:22:59.437Z",
+                        "updatedAt": "2024-04-19T09:22:59.437Z",
+                        "__v": 0
+                      }
+                    ],
+                    "message": "addresses fetched successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/addresses/661fd8414e911d133a29558a": {
+        "patch": {
+          "tags": [
+            "address"
+          ],
+          "summary": "updateAddress",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "addressLine1": "New lane central, D-203",
+                    "addressLine2": "Opposite to central park",
+                    "city": "Mumbai",
+                    "state": "Maharashtra",
+                    "pincode": "409209",
+                    "country": "Uk"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4991"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "566"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "390"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"186-1RmrhERwaGZ3FsyS9ipx3B6lpRM\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 09:12:44 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "6622355410a672b2bd720e6f",
+                      "addressLine1": "New lane central, D-203",
+                      "addressLine2": "Opposite to central park",
+                      "city": "Mumbai",
+                      "state": "Maharashtra",
+                      "pincode": 409209,
+                      "country": "Uk",
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "createdAt": "2024-04-19T09:11:48.529Z",
+                      "updatedAt": "2024-04-19T09:12:44.006Z",
+                      "__v": 0
+                    },
+                    "message": "address updated successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/addresses/661fd9cc1d103fa799dee34d": {
+        "delete": {
+          "tags": [
+            "address"
+          ],
+          "summary": "deleteAddress",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4989"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "517"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "388"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"184-LkuFf4VHW0zw3PUIstXUPFwJR+k\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 09:13:32 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "6622355410a672b2bd720e6f",
+                      "addressLine1": "New lane central, D-203",
+                      "addressLine2": "Opposite to central park",
+                      "city": "Mumbai",
+                      "state": "Maharashtra",
+                      "pincode": 409209,
+                      "country": "Uk",
+                      "owner": "66216e8dd6a2266dce272d97",
+                      "createdAt": "2024-04-19T09:11:48.529Z",
+                      "updatedAt": "2024-04-19T09:12:44.006Z",
+                      "__v": 0
+                    },
+                    "message": "address deleted succefully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/addresses/661fdcd1661f168c8cb4402e": {
+        "get": {
+          "tags": [
+            "address"
+          ],
+          "summary": "getAddressById",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4986"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "3"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "374"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"176-MCeuIWekS9OBevbcG4jcuwyye2M\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 09:22:07 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "_id": "662147253e0f049e92da9905",
+                      "addressLine1": "123 Main Street",
+                      "addressLine2": "Apt 101",
+                      "city": "Anytown",
+                      "state": "Anystate",
+                      "pincode": 743136,
+                      "country": "United States",
+                      "owner": "661ab932c4d459478196053f",
+                      "createdAt": "2024-04-18T16:15:33.608Z",
+                      "updatedAt": "2024-04-18T16:15:33.608Z",
+                      "__v": 0
+                    },
+                    "message": "address fetched successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/orders/provider/razorpay": {
+        "post": {
+          "tags": [
+            "order"
+          ],
+          "summary": "payment",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "addressId": "662147253e0f049e92da9905"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4997"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "830"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "297"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"129-mx2AYWroBHym41QhwgLX0nIRXD8\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 09:25:02 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "id": "order_O0QktZ0hYyu5hT",
+                      "entity": "order",
+                      "amount": 10000,
+                      "amount_paid": 0,
+                      "amount_due": 10000,
+                      "currency": "INR",
+                      "receipt": "D-fZ2aRxMf",
+                      "offer_id": null,
+                      "status": "created",
+                      "attempts": 0,
+                      "notes": [],
+                      "created_at": 1713518702
+                    },
+                    "message": "Razorpay order generated",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/orders/": {
+        "get": {
+          "tags": [
+            "order"
+          ],
+          "summary": "getOrderById",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4996"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "786"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "1665"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"681-eIn9GK2zylzVAZrrk0v/EWCiW2o\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 09:25:45 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 201,
+                    "data": [
+                      {
+                        "_id": "6622386ef26bccc5af2adfbf",
+                        "orderPrice": 200,
+                        "disCountedOrderPrice": 100,
+                        "items": [
+                          {
+                            "product": {
+                              "_id": "66221433205bd3a159656450",
+                              "name": "iphone",
+                              "description": "The iPhone 14 display has rounded corners that follow a beautiful curved design, and these corners are within a standard rectangle. When measured as a standard rectangular shape, the screen is 15.40 centimetres (6.06) diagonally.",
+                              "price": 100,
+                              "stock": 10,
+                              "category": "66221326b5a313bb5afa09c2",
+                              "mainImage": "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509422/wrbi51pi6sx5p1egyemx.png",
+                              "subImages": [
+                                "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509423/gaq8mhbf7xvfg3tzt6ri.jpg",
+                                "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509424/z9ogsnefg7sacnftyksb.jpg",
+                                "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509425/bfmkgwq4wriqlhnpnpp5.png",
+                                "http://res.cloudinary.com/dom61f3n8/image/upload/v1713509426/dimwlmaaulvblwwifdw2.jpg"
+                              ],
+                              "owner": "66216e8dd6a2266dce272d97",
+                              "createdAt": "2024-04-19T06:50:27.418Z",
+                              "updatedAt": "2024-04-19T07:10:11.525Z",
+                              "__v": 0
+                            },
+                            "quantity": 2,
+                            "_id": "66222314025e8da200efcff3"
+                          }
+                        ],
+                        "customer": {
+                          "_id": "66216e8dd6a2266dce272d97",
+                          "username": "user",
+                          "email": "user@gmail.com"
+                        },
+                        "coupon": {
+                          "_id": "66222d3510a672b2bd720e4c",
+                          "name": "saturday special",
+                          "couponCode": "SATURDAY100"
+                        },
+                        "address": {
+                          "_id": "662237f310a672b2bd720e83",
+                          "addressLine1": "123 Main Street",
+                          "addressLine2": "Apt 101",
+                          "city": "kolkata",
+                          "state": "west bengal",
+                          "pincode": 743137,
+                          "country": "india",
+                          "owner": "66216e8dd6a2266dce272d97",
+                          "createdAt": "2024-04-19T09:22:59.437Z",
+                          "updatedAt": "2024-04-19T09:22:59.437Z",
+                          "__v": 0
+                        }
+                      }
+                    ],
+                    "message": "order details fetched successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/orders/list/admin": {
+        "get": {
+          "tags": [
+            "order"
+          ],
+          "summary": "get order list admin",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4998"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "885"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "1393"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"571-+PF4Ra7J317mP7NMm544S5TXJmM\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 09:34:41 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {
+                      "orders": [
+                        {
+                          "_id": "6621231aa48f37e5a3abb918",
+                          "orderPrice": 700,
+                          "disCountedOrderPrice": 200,
+                          "owner": "661be113771a722b17fd94fd",
+                          "items": [
+                            {
+                              "product": "661bb61b445749284264cec0",
+                              "quantity": 3,
+                              "_id": "661f85f333a6365b2649e372"
+                            },
+                            {
+                              "product": "661be165771a722b17fd9507",
+                              "quantity": 4,
+                              "_id": "661f860533a6365b2649e382"
+                            }
+                          ],
+                          "address": "661fdcd1661f168c8cb4402e",
+                          "coupon": "661d4af4b036e0818aa11993",
+                          "paymentId": "order_O06axlh7AgxWF5",
+                          "status": "PENDING",
+                          "isPAymentDone": false,
+                          "__v": 0
+                        },
+                        {
+                          "_id": "662147433e0f049e92da990e",
+                          "orderPrice": 100,
+                          "disCountedOrderPrice": 100,
+                          "owner": "661ab932c4d459478196053f",
+                          "items": [
+                            {
+                              "product": "661be165771a722b17fd9507",
+                              "quantity": 1,
+                              "_id": "662146b23e0f049e92da98fd"
+                            }
+                          ],
+                          "address": "662147253e0f049e92da9905",
+                          "paymentId": "order_O09DvjQohBISeT",
+                          "status": "DELIVERED",
+                          "isPAymentDone": false,
+                          "__v": 0
+                        },
+                        {
+                          "_id": "6622386ef26bccc5af2adfbf",
+                          "orderPrice": 200,
+                          "disCountedOrderPrice": 100,
+                          "owner": "66216e8dd6a2266dce272d97",
+                          "items": [
+                            {
+                              "product": "66221433205bd3a159656450",
+                              "quantity": 2,
+                              "_id": "66222314025e8da200efcff3"
+                            }
+                          ],
+                          "address": "662237f310a672b2bd720e83",
+                          "coupon": "66222d3510a672b2bd720e4c",
+                          "paymentId": "order_O0QktZ0hYyu5hT",
+                          "status": "PENDING",
+                          "isPAymentDone": false,
+                          "__v": 0
+                        }
+                      ],
+                      "OrderList": 3,
+                      "limit": 10,
+                      "page": 1,
+                      "totalPages": 1,
+                      "serialNumberStartFrom": 1,
+                      "hasPrevPage": false,
+                      "hasNextPage": false,
+                      "prevPage": null,
+                      "nextPage": null
+                    },
+                    "message": "Order list fetched successfully",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/healthcheck": {
+        "get": {
+          "tags": [
+            "default"
+          ],
+          "summary": "healthcheck",
+          "responses": {
+            "201": {
+              "description": "Created",
+              "headers": {
+                "X-Powered-By": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Express"
+                  }
+                },
+                "Access-Control-Allow-Origin": {
+                  "schema": {
+                    "type": "string",
+                    "example": "*"
+                  }
+                },
+                "Access-Control-Allow-Credentials": {
+                  "schema": {
+                    "type": "boolean",
+                    "example": "true"
+                  }
+                },
+                "RateLimit-Policy": {
+                  "schema": {
+                    "type": "string",
+                    "example": "5000;w=900"
+                  }
+                },
+                "RateLimit-Limit": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "5000"
+                  }
+                },
+                "RateLimit-Remaining": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "4999"
+                  }
+                },
+                "RateLimit-Reset": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "900"
+                  }
+                },
+                "Content-Type": {
+                  "schema": {
+                    "type": "string",
+                    "example": "application/json; charset=utf-8"
+                  }
+                },
+                "Content-Length": {
+                  "schema": {
+                    "type": "integer",
+                    "example": "73"
+                  }
+                },
+                "ETag": {
+                  "schema": {
+                    "type": "string",
+                    "example": "W/\"49-IkUid7haiWBoDQte1kKoh5zVlyc\""
+                  }
+                },
+                "Date": {
+                  "schema": {
+                    "type": "string",
+                    "example": "Fri, 19 Apr 2024 06:26:01 GMT"
+                  }
+                },
+                "Connection": {
+                  "schema": {
+                    "type": "string",
+                    "example": "keep-alive"
+                  }
+                },
+                "Keep-Alive": {
+                  "schema": {
+                    "type": "string",
+                    "example": "timeout=5"
+                  }
+                }
+              },
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object"
+                  },
+                  "example": {
+                    "statusCode": 200,
+                    "data": {},
+                    "message": "server is healthy",
+                    "success": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
