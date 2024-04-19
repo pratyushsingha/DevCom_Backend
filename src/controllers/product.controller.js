@@ -132,7 +132,7 @@ const updateProduct = asyncHandler(async (req, res) => {
         price,
         stock,
         category,
-        mainImage: mainImage.url,
+        ...(mainImage ? { mainImage: mainImage.url } : {}),
         ...(subImages.length > 0 ? { subImages } : {})
       }
     },
@@ -222,7 +222,7 @@ const getProductsByCategory = asyncHandler(async (req, res) => {
   return res
     .status(201)
     .json(
-      new ApiResponse(200, products, 'Category products fetched successfully')
+      new ApiResponse(200, productAggregate, 'Category products fetched successfully')
     );
 });
 

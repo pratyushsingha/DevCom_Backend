@@ -47,6 +47,7 @@ import cartRouter from './src/routes/cart.routes.js';
 import couponRouter from './src/routes/coupon.routes.js';
 import addressRouter from './src/routes/address.routes.js';
 import orderRouter from './src/routes/order.routes.js';
+import healthCheckRouter from './src/routes/healthcheck.routes.js';
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/products', productRouter);
@@ -55,5 +56,6 @@ app.use('/api/v1/cart', cartRouter);
 app.use('/api/v1/coupons', couponRouter);
 app.use('/api/v1/addresses', addressRouter);
 app.use('/api/v1/orders', orderRouter);
+app.use('/api/v1/healthcheck', healthCheckRouter);
 
 export { app };

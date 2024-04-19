@@ -81,22 +81,27 @@ const updateCoupon = asyncHandler(async (req, res) => {
   }
 
   const couponExists = await Coupon.findOne({
-    $or: [{ name }, { couponCode }],
-    owner: req.user._id,
-    _id: { $ne: couponId }
+    couponCode,
+    owner: req.user._id
   });
   if (couponExists) {
     throw new ApiError(409, 'Coupon with this name or code already exists');
   }
-
-  coupon.couponCode = couponCode;
-  coupon.discountValue = discountValue;
-  coupon.name = name;
-  await coupon.save();
+  const updatedCoupon = await Coupon.findByIdAndUpdate(
+    coupon._id,
+    {
+      $set: {
+        couponCode,
+        name,
+        discountValue
+      }
+    },
+    { new: true }
+  );
 
   return res
     .status(200)
-    .json(new ApiResponse(200, coupon, 'Coupon updated successfully'));
+    .json(new ApiResponse(200, updatedCoupon, 'Coupon updated successfully'));
 });
 
 const getCouponById = asyncHandler(async (req, res) => {

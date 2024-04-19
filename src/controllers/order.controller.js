@@ -221,13 +221,16 @@ const getOrderById = asyncHandler(async (req, res) => {
 });
 
 const orderListAdmin = asyncHandler(async (req, res) => {
+  let matchStage = {};
   const { page, limit, status } = req.query;
+
+  if (status) {
+    matchStage = { status: status };
+  }
 
   const orderAggregate = await Order.aggregate([
     {
-      $match: {
-        status: status
-      }
+      $match: matchStage
     },
     {
       $lookup: {
@@ -284,7 +287,7 @@ const orderListAdmin = asyncHandler(async (req, res) => {
             {
               $first: '$coupon'
             },
-            'Nil'
+            null
           ]
         },
         isPAymentDone: 1,
@@ -309,14 +312,14 @@ const orderListAdmin = asyncHandler(async (req, res) => {
   if (!orderList) {
     throw new ApiError(
       500,
-      'something went wrong while fetching the order list'
+      'Something went wrong while fetching the order list'
     );
   }
 
   return res
-    .status(201)
+    .status(200)
     .json(
-      new ApiResponse(200, orderAggregate, 'order list fetched successfully')
+      new ApiResponse(200, orderList, 'Order list fetched successfully')
     );
 });
 
