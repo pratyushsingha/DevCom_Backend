@@ -226,8 +226,8 @@ const orderListAdmin = asyncHandler(async (req, res) => {
   const orderAggregate = await Order.aggregate([
     {
       $match: {
-        status: status,
-      },
+        status: status
+      }
     },
     {
       $lookup: {
@@ -315,7 +315,9 @@ const orderListAdmin = asyncHandler(async (req, res) => {
 
   return res
     .status(201)
-    .json(new ApiResponse(200, orderAggregate, 'order list fetched successfully'));
+    .json(
+      new ApiResponse(200, orderAggregate, 'order list fetched successfully')
+    );
 });
 
 export { checkout, orderVerification, getOrderById, orderListAdmin };
