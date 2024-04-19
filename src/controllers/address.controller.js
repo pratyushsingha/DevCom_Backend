@@ -111,7 +111,7 @@ const getAllAddresses = asyncHandler(async (req, res) => {
 
   return res
     .status(201)
-    .json(new ApiResponse(200, addresses, 'addresses fetched successfully'));
+    .json(new ApiResponse(200, addressAggregate, 'addresses fetched successfully'));
 });
 
 export {
