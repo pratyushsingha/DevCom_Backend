@@ -63,10 +63,7 @@ app.use(
   '/api/v1/docs',
   swaggerUi.serve,
   swaggerUi.setup(swaggerDocument, {
-    swaggerOptions: {
-      docExpansion: 'none'
-    },
-    customSiteTitle:'Devcom Api Docs'
+    customSiteTitle: 'Devcom Api Docs'
   })
 );
 
