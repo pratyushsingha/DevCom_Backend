@@ -56,7 +56,7 @@ const orderSchema = mongoose.Schema(
       default: false
     }
   },
-  { timeStamps: true }
+  { timestamps: true }
 );
 
 orderSchema.plugin(mongooseAggregatePaginate);
