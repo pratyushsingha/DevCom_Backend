@@ -11,6 +11,46 @@ import { Cart } from '../../models/cart.model.js';
 import mongoose from 'mongoose';
 import { getMongoosePaginationOptions } from '../utils/helper.js';
 
+const updateStock = asyncHandler(async (orderPaymentId, req) => {
+  const order = await Order.findOneAndUpdate(
+    { paymentId: orderPaymentId },
+    {
+      $set: {
+        isPAymentDone: true
+      }
+    },
+    { new: true }
+  );
+
+  if (!order) {
+    throw new ApiError(409, 'order not found');
+  }
+  const cart = await Cart.findOne({
+    owner: req.user._id
+  });
+
+  const userCart = await getCart(req.user._id);
+
+  let bulkStockUpdates = userCart.items.map((item) => {
+    return {
+      updateOne: {
+        filter: { _id: item.product?._id },
+        update: { $inc: { stock: -item.quantity } }
+      }
+    };
+  });
+
+  await Product.bulkWrite(bulkStockUpdates, {
+    skipValidation: true
+  });
+
+  cart.items = [];
+  cart.coupon = null;
+
+  await cart.save({ validateBeforeSave: false });
+  return order;
+});
+
 const instance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET
@@ -94,7 +134,10 @@ const orderVerification = asyncHandler(async (req, res) => {
     razorpaySignature
   } = req.body;
 
-  const shasum = crypto.createHmac('sha256', 'hdheuh37ehr4urhrj');
+  const shasum = crypto.createHmac(
+    'sha256',
+    `${process.env.RAZORPAY_KEY_SECRET}`
+  );
   shasum.update(`${orderCreationId}|${razorpayPaymentId}`);
 
   const digest = shasum.digest('hex');
@@ -102,16 +145,12 @@ const orderVerification = asyncHandler(async (req, res) => {
     throw new ApiError(400, 'transaction not legit');
   }
 
-  return res.status(201).json(
-    new ApiResponse(
-      201,
-      {
-        orderId: razorpayOrderId,
-        paymentId: razorpayPaymentId
-      },
-      'payment verified successfully'
-    )
-  );
+  const order = await updateStock(razorpayOrderId, req);
+
+  return res
+    .status(201)
+    .redirect(`${process.env.FRONTEND_URL}/success?ref=${razorpayPaymentId}`)
+    .json(new ApiResponse(201, order, 'Order placed syccessfully'));
 });
 
 const getOrderById = asyncHandler(async (req, res) => {
@@ -200,7 +239,7 @@ const getOrderById = asyncHandler(async (req, res) => {
         disCountedOrderPrice: 1,
         customer: { $first: '$customer' },
         coupon: {
-          $ifNull: [{ $first: '$coupon' }, 'Nil']
+          $ifNull: [{ $first: '$coupon' }, null]
         },
         address: { $first: '$address' },
         items: 1
@@ -318,9 +357,133 @@ const orderListAdmin = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
+    .json(new ApiResponse(200, orderList, 'Order list fetched successfully'));
+});
+
+const myOrders = asyncHandler(async (req, res) => {
+  const { page, limit } = req.query;
+  const myOrderAggregate = await Order.aggregate([
+    {
+      $match: {
+        owner: new mongoose.Types.ObjectId(req.user._id)
+      }
+    },
+    {
+      $lookup: {
+        from: 'addresses',
+        localField: 'address',
+        foreignField: '_id',
+        as: 'address'
+      }
+    },
+    {
+      $lookup: {
+        from: 'coupons',
+        localField: 'coupon',
+        foreignField: '_id',
+        as: 'coupon',
+        pipeline: [
+          {
+            $project: {
+              _id: 1,
+              couponCode: 1,
+              name: 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'owner',
+        foreignField: '_id',
+        as: 'customer',
+        pipeline: [
+          {
+            $project: {
+              _id: 1,
+              email: 1,
+              username: 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      $project: {
+        items: 1,
+        coupon: { $first: '$coupon' },
+        createdAt: 1,
+        paymentId: 1,
+        status: 1,
+        updatedAt: 1,
+        orderPrice: 1,
+        disCountedOrderPrice: 1,
+        isPAymentDone: 1,
+        address: { $first: '$address' },
+        customer: { $first: '$customer' },
+        totalOrderItems: { $size: '$items' }
+      }
+    }
+  ]);
+
+  const order = await Order.aggregatePaginate(
+    myOrderAggregate,
+    getMongoosePaginationOptions({
+      page,
+      limit
+    })
+  );
+  if (myOrderAggregate.length === 0) {
+    return res
+      .status(201)
+      .json(
+        new ApiResponse(200, { orders: [] }, 'orders fetched successfully')
+      );
+  } else {
+    return res
+      .status(201)
+      .json(
+        new ApiResponse(201, myOrderAggregate, 'orders fetched successfully')
+      );
+  }
+});
+
+const updateOrderStatus = asyncHandler(async (req, res) => {
+  const { orderId } = req.params;
+  const { status } = req.body;
+
+  const updateOrder = await Order.findByIdAndUpdate(
+    orderId,
+    {
+      $set: {
+        status
+      }
+    },
+    { new: true }
+  );
+
+  if (!updateOrder) {
+    throw new ApiError(500, 'something went wrong while updating order status');
+  }
+
+  return res
+    .status(201)
     .json(
-      new ApiResponse(200, orderList, 'Order list fetched successfully')
+      new ApiResponse(
+        200,
+        { status: 'FULFILLED' },
+        'order status changes successfully'
+      )
     );
 });
 
-export { checkout, orderVerification, getOrderById, orderListAdmin };
+export {
+  checkout,
+  orderVerification,
+  getOrderById,
+  orderListAdmin,
+  myOrders,
+  updateOrderStatus
+};
