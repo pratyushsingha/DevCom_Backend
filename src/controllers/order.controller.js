@@ -10,8 +10,9 @@ import { Order } from '../../models/order.model.js';
 import { Cart } from '../../models/cart.model.js';
 import mongoose from 'mongoose';
 import { getMongoosePaginationOptions } from '../utils/helper.js';
+import { Product } from '../../models/product.model.js';
 
-const updateStock = asyncHandler(async (orderPaymentId, req) => {
+const updateStock = async (orderPaymentId, req) => {
   const order = await Order.findOneAndUpdate(
     { paymentId: orderPaymentId },
     {
@@ -49,7 +50,7 @@ const updateStock = asyncHandler(async (orderPaymentId, req) => {
 
   await cart.save({ validateBeforeSave: false });
   return order;
-});
+};
 
 const instance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
@@ -71,15 +72,16 @@ const checkout = asyncHandler(async (req, res) => {
   const userCart = await Cart.findOne({
     owner: req.user._id
   });
-  console.log(userCart);
+  // console.log(userCart);
   if (!userCart || !userCart.items?.length) {
     throw new ApiError(400, 'cart is empty');
   }
   const orderItems = userCart.items;
+  // console.log(userCart.items);
   const cart = await getCart(req.user._id);
 
   const options = {
-    amount: cart.discountCartValue * 100,
+    amount: Number(cart.discountCartValue * 100),
     currency: 'INR',
     receipt: nanoid(10)
   };
@@ -97,6 +99,17 @@ const checkout = asyncHandler(async (req, res) => {
           )
         );
     }
+
+    console.log({
+      address: addressId,
+      customer: req.user._id,
+      items: orderItems,
+      orderPrice: cart.cartTotal ?? 0,
+      disCountedOrderPrice: cart.discountCartValue ?? 0,
+      paymentId: razorpayOrder.id,
+      coupon: cart.coupon?._id,
+      owner: req.user._id
+    });
 
     const unpaidOrder = await Order.create({
       address: addressId,
@@ -126,36 +139,34 @@ const checkout = asyncHandler(async (req, res) => {
   });
 });
 
-const orderVerification = asyncHandler(async (req, res) => {
-  const {
-    orderCreationId,
-    razorpayPaymentId,
-    razorpayOrderId,
-    razorpaySignature
-  } = req.body;
+const orderVerification = async (req, res) => {
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+    req.body;
+  console.log(req.body);
+  const body = razorpay_order_id + '|' + razorpay_payment_id;
 
-  const shasum = crypto.createHmac(
-    'sha256',
-    `${process.env.RAZORPAY_KEY_SECRET}`
-  );
-  shasum.update(`${orderCreationId}|${razorpayPaymentId}`);
+  const signature = crypto
+    .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
+    .update(body.toString())
+    .digest('hex');
+  console.log(signature, razorpay_signature);
 
-  const digest = shasum.digest('hex');
-  if (digest !== razorpaySignature) {
-    throw new ApiError(400, 'transaction not legit');
+  if (signature === razorpay_signature) {
+    await updateStock(razorpay_order_id, req);
+    return res
+      .status(201)
+      .redirect(
+        `${process.env.FRONTEND_URL}/paymentsuccess?ref=${razorpay_payment_id}`
+      );
+  } else {
+    throw new ApiError('something went wrong');
   }
 
-  const order = await updateStock(razorpayOrderId, req);
-
-  return res
-    .status(201)
-    .redirect(`${process.env.FRONTEND_URL}/success?ref=${razorpayPaymentId}`)
-    .json(new ApiResponse(201, order, 'Order placed syccessfully'));
-});
+  // console.log('ok');
+};
 
 const getOrderById = asyncHandler(async (req, res) => {
-  const { orderId } = req.body;
-
+  const { orderId } = req.params;
   const order = await Order.aggregate([
     {
       $match: {
@@ -427,13 +438,21 @@ const myOrders = asyncHandler(async (req, res) => {
       }
     }
   ]);
+  const options = {
+    page: req.query.page,
+    limit: req.query.limit
+  };
 
   const order = await Order.aggregatePaginate(
     myOrderAggregate,
-    getMongoosePaginationOptions({
-      page,
-      limit
-    })
+    options,
+    function (err, results) {
+      if (err) {
+        console.err(err);
+      } else {
+        console.log(results);
+      }
+    }
   );
   if (myOrderAggregate.length === 0) {
     return res

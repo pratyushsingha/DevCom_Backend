@@ -12,7 +12,7 @@ import {
 
 const router = Router();
 
-router.route('/').get(verifyJWT, getAllCategories);
+router.route('/').get(getAllCategories);
 router
   .route('/')
   .post(

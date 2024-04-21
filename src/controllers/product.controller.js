@@ -222,8 +222,30 @@ const getProductsByCategory = asyncHandler(async (req, res) => {
   return res
     .status(201)
     .json(
-      new ApiResponse(200, productAggregate, 'Category products fetched successfully')
+      new ApiResponse(
+        200,
+        productAggregate,
+        'Category products fetched successfully'
+      )
     );
+});
+
+const searchProduct = asyncHandler(async (req, res) => {
+  const query = req.query.q;
+  const products = await Product.find({
+    $or: [
+      { name: { $regex: query, $options: 'i' } },
+      { description: { $regex: query, $options: 'i' } }
+    ]
+  });
+
+  if (!products) {
+    throw new ApiError(500, 'something went wrong while getting products');
+  }
+
+  return res
+    .status(201)
+    .json(new ApiResponse(200, products, 'products fetched successfully'));
 });
 
 export {
@@ -232,5 +254,6 @@ export {
   updateProduct,
   deleteProduct,
   getAllProducts,
-  getProductsByCategory
+  getProductsByCategory,
+  searchProduct
 };
