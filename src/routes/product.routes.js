@@ -6,6 +6,7 @@ import {
   getAllProducts,
   getProductById,
   getProductsByCategory,
+  searchProduct,
   updateProduct
 } from '../controllers/product.controller.js';
 import { upload } from '../middlewares/multer.middleware.js';
@@ -36,7 +37,7 @@ router.route('/').post(
   ]),
   createProduct
 );
-router.route('/:productId').get(verifyJWT, getProductById);
+router.route('/:productId').get(getProductById);
 router.route('/:productId').patch(
   verifyJWT,
   verifyADMIN,
@@ -53,5 +54,6 @@ router.route('/:productId').patch(
 );
 router.route('/:productId').delete(verifyJWT, verifyADMIN, deleteProduct);
 router.route('/').get(getAllProducts);
+router.route('/search').get(searchProduct);
 
 export default router;
