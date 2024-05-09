@@ -51,7 +51,9 @@ import couponRouter from './src/routes/coupon.routes.js';
 import addressRouter from './src/routes/address.routes.js';
 import orderRouter from './src/routes/order.routes.js';
 import healthCheckRouter from './src/routes/healthcheck.routes.js';
-import wishlistRouter from './src/routes/wishlist.routes.js'
+import wishlistRouter from './src/routes/wishlist.routes.js';
+import reviewRouter from './src/routes/review.routes.js';
+import adminRouter from './src/routes/admin.routes.js';
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/products', productRouter);
@@ -61,7 +63,9 @@ app.use('/api/v1/coupons', couponRouter);
 app.use('/api/v1/addresses', addressRouter);
 app.use('/api/v1/orders', orderRouter);
 app.use('/api/v1/wishlist', wishlistRouter);
+app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/healthcheck', healthCheckRouter);
+app.use('/api/v1/admin', adminRouter);
 app.use(
   '/api/v1/docs',
   swaggerUi.serve,

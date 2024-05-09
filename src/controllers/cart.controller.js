@@ -109,6 +109,7 @@ const addToCart = asyncHandler(async (req, res) => {
   let updateProductQuantity;
 
   const cart = await Cart.findOne({ owner: req.user._id });
+  cart.coupon = null;
 
   if (!cart) {
     updateProductQuantity = await Cart.create({
@@ -125,7 +126,7 @@ const addToCart = asyncHandler(async (req, res) => {
       cart.items.push({ product: productId, quantity });
     }
     await cart.save();
-    updateProductQuantity = cart;
+    updateProductQuantity = await getCart(req.user._id);
   }
 
   return res
@@ -169,10 +170,47 @@ const removeFromCart = asyncHandler(async (req, res) => {
   }
 
   await cart.save();
+  const updateProductQuantity = await getCart(req.user._id);
 
   return res
     .status(200)
-    .json(new ApiResponse(200, cart, 'Product removed from cart successfully'));
+    .json(
+      new ApiResponse(
+        200,
+        updateProductQuantity,
+        'Product removed from cart successfully'
+      )
+    );
+});
+
+const removeItemFromCart = asyncHandler(async (req, res) => {
+  const { productId } = req.params;
+
+  productIdValidator(productId);
+
+  const cart = await Cart.findOne({ owner: req.user._id });
+
+  if (!cart) {
+    throw new ApiError(403, 'Cart is empty');
+  }
+
+  const productIndex = cart.items.findIndex(
+    (item) => item.product.toString() === productId.toString()
+  );
+
+  if (productIndex === -1) {
+    throw new ApiError(422, 'Product is not added in cart');
+  }
+  cart.items.splice(productIndex, 1);
+
+  await cart.save();
+  const updateProductQuantity = await getCart(req.user._id);
+
+  return res
+    .status(201)
+    .json(
+      new ApiResponse(200, updateProductQuantity, 'product removed from cart')
+    );
 });
 
 const clearCart = asyncHandler(async (req, res) => {
@@ -187,6 +225,7 @@ const clearCart = asyncHandler(async (req, res) => {
   }
 
   cart.items = [];
+  cart.coupon = null;
   await cart.save();
 
   return res
@@ -201,4 +240,10 @@ const getUserCart = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, cart, 'cart fetched successfully'));
 });
 
-export { addToCart, removeFromCart, clearCart, getUserCart };
+export {
+  addToCart,
+  removeFromCart,
+  clearCart,
+  getUserCart,
+  removeItemFromCart
+};

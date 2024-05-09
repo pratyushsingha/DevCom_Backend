@@ -169,7 +169,7 @@ const getAvailableCouponCodes = asyncHandler(async (req, res) => {
     (coupon) => coupon.minimumCartValue <= cart.cartTotal
   );
 
-  if (availableCoupons.length === 0) {
+  if (availableCoupons.length === 0 && cart.items.length > 0) {
     throw new ApiError(422, 'Add more item to avail coupon');
   }
 
