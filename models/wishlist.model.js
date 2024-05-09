@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import mongooseAggregatePaginate from 'mongoose-aggregate-paginate-v2';
 
 const wishlistSchema = mongoose.Schema(
   {
@@ -21,5 +22,7 @@ const wishlistSchema = mongoose.Schema(
   },
   { timestamps: true }
 );
+
+wishlistSchema.plugin(mongooseAggregatePaginate)
 
 export const Wishlist = mongoose.model('Wishlist', wishlistSchema);

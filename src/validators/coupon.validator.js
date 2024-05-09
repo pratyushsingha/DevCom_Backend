@@ -15,14 +15,8 @@ const createCouponValidator = () => {
       .withMessage('minimum cart value is required')
       .isNumeric()
       .withMessage('Minimum cart value must be a number'),
-    body('expiryDate')
-      .optional()
-      .isDate()
-      .withMessage('Expiry date must be a valid date'),
-    body('startDate')
-      .optional()
-      .isDate()
-      .withMessage('Start date must be a valid date')
+    body('expiryDate').optional(),
+    body('startDate').optional()
   ];
 };
 

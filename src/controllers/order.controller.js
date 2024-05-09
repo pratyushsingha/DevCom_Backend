@@ -100,16 +100,16 @@ const checkout = asyncHandler(async (req, res) => {
         );
     }
 
-    console.log({
-      address: addressId,
-      customer: req.user._id,
-      items: orderItems,
-      orderPrice: cart.cartTotal ?? 0,
-      disCountedOrderPrice: cart.discountCartValue ?? 0,
-      paymentId: razorpayOrder.id,
-      coupon: cart.coupon?._id,
-      owner: req.user._id
-    });
+    // console.log({
+    //   address: addressId,
+    //   customer: req.user._id,
+    //   items: orderItems,
+    //   orderPrice: cart.cartTotal ?? 0,
+    //   disCountedOrderPrice: cart.discountCartValue ?? 0,
+    //   paymentId: razorpayOrder.id,
+    //   coupon: cart.coupon?._id,
+    //   owner: req.user._id
+    // });
 
     const unpaidOrder = await Order.create({
       address: addressId,
@@ -240,7 +240,9 @@ const getOrderById = asyncHandler(async (req, res) => {
         customer: { $first: '$customer' },
         coupon: { $first: '$coupon' },
         address: { $first: '$address' },
-        items: { $push: '$items' }
+        items: { $push: '$items' },
+        status: { $first: '$status' },
+        paymentId: { $first: '$paymentId' }
       }
     },
     {
@@ -253,7 +255,9 @@ const getOrderById = asyncHandler(async (req, res) => {
           $ifNull: [{ $first: '$coupon' }, null]
         },
         address: { $first: '$address' },
-        items: 1
+        items: 1,
+        status: 1,
+        paymentId: 1
       }
     }
   ]);
@@ -278,33 +282,38 @@ const orderListAdmin = asyncHandler(async (req, res) => {
     matchStage = { status: status };
   }
 
-  const orderAggregate = await Order.aggregate([
+  const orderAggregate = Order.aggregate([
     {
       $match: matchStage
     },
     {
+      $unwind: {
+        path: '$items'
+      }
+    },
+    {
       $lookup: {
-        from: 'coupons',
-        localField: 'coupon',
+        from: 'products',
+        localField: 'items.product',
         foreignField: '_id',
-        as: 'coupon',
+        as: 'items.product',
         pipeline: [
           {
             $project: {
-              _id: 1,
-              couponCode: 1,
-              name: 1
+              owner: 1
             }
           }
         ]
       }
     },
     {
-      $lookup: {
-        from: 'addresses',
-        localField: 'address',
-        foreignField: '_id',
-        as: 'address'
+      $unwind: {
+        path: '$items.product'
+      }
+    },
+    {
+      $match: {
+        'items.product.owner': new mongoose.Types.ObjectId(req.user._id)
       }
     },
     {
@@ -317,7 +326,6 @@ const orderListAdmin = asyncHandler(async (req, res) => {
           {
             $project: {
               _id: 1,
-              email: 1,
               username: 1
             }
           }
@@ -327,22 +335,10 @@ const orderListAdmin = asyncHandler(async (req, res) => {
     {
       $project: {
         _id: 1,
-        orderPrice: 1,
-        disCountedOrderPrice: 1,
-        items: 1,
         customer: { $first: '$customer' },
-        address: { $first: '$address' },
-        coupon: {
-          $ifNull: [
-            {
-              $first: '$coupon'
-            },
-            null
-          ]
-        },
-        isPAymentDone: 1,
-        status: 1,
-        paymentId: 1
+        disCountedOrderPrice: 1,
+        orderPrice: 1,
+        status: 1
       }
     }
   ]);
@@ -372,8 +368,17 @@ const orderListAdmin = asyncHandler(async (req, res) => {
 });
 
 const myOrders = asyncHandler(async (req, res) => {
-  const { page, limit } = req.query;
-  const myOrderAggregate = await Order.aggregate([
+  const { page, limit, status } = req.query;
+  let matchStage = {};
+  if (status) {
+    matchStage = {
+      status: status
+    };
+  }
+  const myOrderAggregate = Order.aggregate([
+    {
+      $match: matchStage
+    },
     {
       $match: {
         owner: new mongoose.Types.ObjectId(req.user._id)
@@ -438,23 +443,18 @@ const myOrders = asyncHandler(async (req, res) => {
       }
     }
   ]);
-  const options = {
-    page: req.query.page,
-    limit: req.query.limit
-  };
-
   const order = await Order.aggregatePaginate(
     myOrderAggregate,
-    options,
-    function (err, results) {
-      if (err) {
-        console.err(err);
-      } else {
-        console.log(results);
+    getMongoosePaginationOptions({
+      page,
+      limit,
+      customLabels: {
+        totalDocs: 'AllOrders',
+        docs: 'orders'
       }
-    }
+    })
   );
-  if (myOrderAggregate.length === 0) {
+  if (order.length === 0) {
     return res
       .status(201)
       .json(
@@ -463,9 +463,7 @@ const myOrders = asyncHandler(async (req, res) => {
   } else {
     return res
       .status(201)
-      .json(
-        new ApiResponse(201, myOrderAggregate, 'orders fetched successfully')
-      );
+      .json(new ApiResponse(201, order, 'orders fetched successfully'));
   }
 });
 

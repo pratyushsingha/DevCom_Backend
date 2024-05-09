@@ -94,11 +94,6 @@ const updateProduct = asyncHandler(async (req, res) => {
 
   productIdValidator(productId);
 
-  const productExists = await Product.findOne({ name, owner: req.user._id });
-  if (productExists) {
-    throw new ApiError(409, 'a product with this name already exists');
-  }
-
   let mainImageLocalPath;
   let subImages = [];
 

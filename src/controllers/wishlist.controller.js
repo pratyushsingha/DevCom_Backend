@@ -12,7 +12,7 @@ const addToWishlist = asyncHandler(async (req, res) => {
   if (!product) {
     throw new ApiError(422, "product doesn't exists");
   }
-
+  let addedProduct;
   const wishlist = await Wishlist.findOne({ owner: req.user._id });
   if (wishlist) {
     const existingItem = wishlist.items.find(
@@ -23,16 +23,18 @@ const addToWishlist = asyncHandler(async (req, res) => {
     } else {
       wishlist.items.push({ product: productId });
       await wishlist.save();
+      addedProduct = product._id;
     }
   } else {
-    const addToWish = await Wishlist.create({
+    await Wishlist.create({
       items: [{ product: productId }],
       owner: req.user._id
     });
+    addedProduct = product._id;
   }
   return res
     .status(201)
-    .json(new ApiResponse(200, wishlist, 'item added to wishlist'));
+    .json(new ApiResponse(200, addedProduct, 'item added to wishlist'));
 });
 
 const removeFromWishlist = asyncHandler(async (req, res) => {
@@ -60,10 +62,13 @@ const removeFromWishlist = asyncHandler(async (req, res) => {
 
   const removeItem = wishlist.items.splice(itemIndex, 1);
   await wishlist.save();
+  const removedProduct = product._id;
 
   return res
     .status(201)
-    .json(new ApiResponse(201, wishlist, 'product removed from wishlist'));
+    .json(
+      new ApiResponse(201, removedProduct, 'product removed from wishlist')
+    );
 });
 
 const getMyWishlist = asyncHandler(async (req, res) => {
@@ -115,11 +120,27 @@ const getMyWishlist = asyncHandler(async (req, res) => {
     }
   ]);
 
-  return res
-    .status(201)
-    .json(
-      new ApiResponse(200, wishlistAggregate, 'wishlist fetched successfully')
-    );
+  if (wishlistAggregate.length > 0) {
+    return res
+      .status(201)
+      .json(
+        new ApiResponse(
+          203,
+          wishlistAggregate[0],
+          'wishlist fetched successfully'
+        )
+      );
+  } else {
+    return res
+      .status(201)
+      .json(
+        new ApiResponse(
+          203,
+          { id: null, items: [] },
+          'wishlist fetched successfully'
+        )
+      );
+  }
 });
 
 export { addToWishlist, removeFromWishlist, getMyWishlist };
