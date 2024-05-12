@@ -226,11 +226,11 @@ const getProductsByCategory = asyncHandler(async (req, res) => {
 });
 
 const searchProduct = asyncHandler(async (req, res) => {
-  const query = req.query.q;
+  const { q } = req.query;
   const products = await Product.find({
     $or: [
-      { name: { $regex: query, $options: 'i' } },
-      { description: { $regex: query, $options: 'i' } }
+      { name: { $regex: q, $options: 'i' } },
+      { description: { $regex: q, $options: 'i' } }
     ]
   });
 
