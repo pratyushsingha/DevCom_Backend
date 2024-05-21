@@ -164,6 +164,10 @@ const getAllCoupons = asyncHandler(async (req, res) => {
 const getAvailableCouponCodes = asyncHandler(async (req, res) => {
   const cart = await getCart(req.user._id);
   const coupons = await getCoupons();
+  // console.log(coupons)
+  if (coupons.length === 0) {
+    throw new ApiError(404, 'No coupons available');
+  }
 
   const availableCoupons = coupons.filter(
     (coupon) => coupon.minimumCartValue <= cart.cartTotal

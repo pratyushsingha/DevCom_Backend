@@ -19,6 +19,7 @@ import { validate } from '../utils/validate.js';
 
 const router = Router();
 
+router.route('/search').get(searchProduct);
 router.route('/category/:categoryId').get(getProductsByCategory);
 router.route('/').post(
   verifyJWT,
@@ -54,6 +55,5 @@ router.route('/:productId').patch(
 );
 router.route('/:productId').delete(verifyJWT, verifyADMIN, deleteProduct);
 router.route('/').get(getAllProducts);
-router.route('/search').get(searchProduct);
 
 export default router;
