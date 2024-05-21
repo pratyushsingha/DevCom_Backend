@@ -109,10 +109,11 @@ const addToCart = asyncHandler(async (req, res) => {
   let updateProductQuantity;
 
   const cart = await Cart.findOne({ owner: req.user._id });
-  if (cart.coupon !== null) {
-    cart.coupon = null;
-  }
-
+  // if (cart.coupon !== null) {
+  //   cart.coupon = null;
+  // }
+  console.log(cart);
+  cart.coupon = null;
   if (!cart) {
     updateProductQuantity = await Cart.create({
       items: [{ product: productId, quantity }],

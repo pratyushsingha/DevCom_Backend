@@ -166,12 +166,11 @@ const deleteProduct = asyncHandler(async (req, res) => {
 const getAllProducts = asyncHandler(async (req, res) => {
   const { page, limit } = req.query;
 
-  const productAggregate = await Product.aggregate([
+  const productAggregate = Product.aggregate([
     {
       $match: {}
     }
   ]);
-
   const products = await Product.aggregatePaginate(
     productAggregate,
     getMongoosePaginationOptions({
@@ -183,7 +182,8 @@ const getAllProducts = asyncHandler(async (req, res) => {
       }
     })
   );
-
+  
+  console.log(products)
   return res
     .status(201)
     .json(new ApiResponse(200, products, 'products fetched successfully'));
